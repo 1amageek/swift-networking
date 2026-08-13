@@ -8,6 +8,10 @@ time abstractions, and platform adapters shared by protocol implementations such
 as `swift-ssl`, `swift-tls`, `swift-quic`, `swift-webrtc`, `swift-mDNS`, and
 `swift-libp2p`.
 
+> [!NOTE]
+> Version 0.1.0 is the first public release of this responsibility boundary.
+> Minor versions before 1.0 may make source-breaking API changes.
+
 It is not a high-level networking framework and does not replace Apple's
 `Network` framework. It contains no HTTP client, connection orchestration, TLS
 handshake, QUIC state machine, DNS codec, or application session API.
@@ -131,13 +135,13 @@ lifetime features:
 
 ## Installation
 
-Until the first semantic-versioned release is tagged, depend on `main`:
+Depend on the current 0.1 release line:
 
 ```swift
 dependencies: [
     .package(
         url: "https://github.com/1amageek/swift-networking.git",
-        branch: "main"
+        .upToNextMinor(from: "0.1.0")
     )
 ]
 ```
