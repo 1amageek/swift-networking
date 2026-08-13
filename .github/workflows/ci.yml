@@ -31,6 +31,10 @@ jobs:
               -o "$package"
             installer -pkg "$package" -target CurrentUserHomeDirectory
           fi
+          ln -sfn \
+            "$(/usr/bin/xcrun --toolchain XcodeDefault --find ld)" \
+            "$toolchain/usr/bin/ld"
+          test -x "$toolchain/usr/bin/ld"
           xcrun swiftc --version | tee "$RUNNER_TEMP/swift-version.txt"
           grep -F "Swift ${SWIFT_COMPILER_COMMIT}" "$RUNNER_TEMP/swift-version.txt"
       - name: Test package with Xcode
