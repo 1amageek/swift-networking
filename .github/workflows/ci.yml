@@ -16,7 +16,7 @@ on:
 
 jobs:
   macos:
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
@@ -42,7 +42,7 @@ jobs:
               -scheme swift-networking-Package \
               -destination 'platform=macOS' \
               -parallel-testing-enabled NO \
-              "LD_RUNPATH_SEARCH_PATHS=$HOME/Library/Developer/Toolchains/${SWIFT_SNAPSHOT}.xctoolchain/usr/lib/swift/macosx/testing"
+              "LD_RUNPATH_SEARCH_PATHS=\$(inherited) $HOME/Library/Developer/Toolchains/${SWIFT_SNAPSHOT}.xctoolchain/usr/lib/swift/macosx/testing"
 
   wasm:
     runs-on: macos-26
