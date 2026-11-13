@@ -547,12 +547,15 @@ final class POSIXDatagramSocket: Sendable {
     private func startReceiveWorker() -> Int32 {
         let unmanaged = Unmanaged.passRetained(self)
 
-        #if canImport(Darwin)
+        #if canImport(Darwin) || canImport(Musl)
         var thread: pthread_t? = nil
         let result = pthread_create(
             &thread,
             nil,
             { rawContext in
+                #if canImport(Musl)
+                guard let rawContext else { return nil }
+                #endif
                 let socket = Unmanaged<POSIXDatagramSocket>
                     .fromOpaque(rawContext)
                     .takeRetainedValue()
