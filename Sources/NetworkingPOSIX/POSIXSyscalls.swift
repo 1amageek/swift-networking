@@ -10,10 +10,10 @@ import Musl
 
 @inline(__always)
 var posixDatagramSocketType: Int32 {
-    #if canImport(Darwin)
-    SOCK_DGRAM
-    #else
+    #if canImport(Glibc)
     Int32(SOCK_DGRAM.rawValue)
+    #else
+    SOCK_DGRAM
     #endif
 }
 
